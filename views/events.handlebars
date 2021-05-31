@@ -1,0 +1,21 @@
+<div class="text-center event">
+
+  <h2>{{event_name}}</h2>
+
+  <p>{{description}}</p>
+  <p>
+    <span for="img" aria-label="money">💲</span>
+
+    <span class="dollar-amount">{{format_amount total_cost}}</span>
+    needed
+  </p>
+  <p>
+    <button id= "split-bill" class="btn btn-primary">Split this bill</button>
+
+  </p>
+        <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{event.id}}">DELETE</button>
+      </div>
+</div>
+<script src="./js/events.js"></script>
+<script src="./js/profile.js"></script>

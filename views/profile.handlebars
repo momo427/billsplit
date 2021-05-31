@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{name}}!</h2>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Create a New Bill:</h3>
+    <form id="new-events-form" class="form new-events-form">
+      <div class="form-group">
+        <label for="events-name">event name:</label>
+        <input class="form-input" type="text" id="events-name" name="events-name" />
+      </div>
+      <div class="form-group">
+        <label for="events-cost">Total cost ($):</label>
+        <input class="form-input" type="number" id="events-cost" name="events-cost" />
+      </div>
+      <div class="form-group">
+        <label for="events-desc">description:</label>
+        <textarea class="form-input" id="events-desc" name="events-desc"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+      </div>
+      <div class="form-group">
+        <button type="add" class="btn btn-primary">Add Participants</button>
+      <input id="searchinput" name="search" class="input" type="text" placeholder="Add Participants here" ></input>
+      </div>
+    </form>
+  </div>
+  {{#if events.length}}
+  <div class="col-md-6 events-list">
+    <h3>Current Bills:</h3>
+    {{#each events as |event|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/events/{{events.id}}">{{events.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{event.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+<script src="./js/profile.js"></script>
+
