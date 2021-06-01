@@ -40,6 +40,11 @@ router.delete('/', withAuth, async (req, res) => {
   }
 });
 
+
+
+
+module.exports = router;
+
 // router.get('/', (req, res) => {
 //   Events.findAll({
 //     include: [
@@ -56,6 +61,3 @@ router.delete('/', withAuth, async (req, res) => {
 //     res.status(500).json(err)
 //   })
 // })
-
-
-module.exports = router;
