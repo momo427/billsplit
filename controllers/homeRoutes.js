@@ -88,7 +88,7 @@ let mailOptions = {
   from: 'ty.devspot@gmail.com',
   to: req.body.email,
   subject: 'Sending Email using Node.js',
-  text: output
+  text: req.body.message
 }
 transporter.sendMail(mailOptions, function(error, info){
   if (error) {
