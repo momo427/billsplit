@@ -38,11 +38,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-// app.use(routes);
+app.use(routes);
 
-app.get('/', (req, res) => {
-res.send('testing')
-});
+// app.get('/', (req, res) => {
+// res.send('testing')
+// });
 
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log("listen"));
