@@ -55,13 +55,13 @@ router.get("/events/:id", withAuth, async (req, res) => {
 });
 
 
-router.get("/split", withAuth, async (req, res) => {
+router.get("/split", withAuth, (req, res) => {
  
   res.render("contact")
 });
 
 
-router.post("/send",withAuth, async (req, res) =>{
+router.post("/send",withAuth, (req, res) =>{
   var output =`
   <p>You have a new contact request</p>
   <h3>Contact Details</h3>
