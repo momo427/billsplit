@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { Events, User, Memberships } = require("../models");
 const withAuth = require("../utils/auth");
 const nodemailer = require('nodemailer');
-const output =''
+
 
 router.get("/", withAuth, async (req, res) => {
   try {
@@ -61,55 +61,42 @@ router.get("/split", withAuth, (req, res) => {
 });
 
 
+
+
 router.post("/send",withAuth, (req, res) =>{
   var output =`
   <p>You have a new contact request</p>
   <h3>Contact Details</h3>
   <ul>  
     <li>Name: ${req.body.name}</li>
-    <li>Company: ${req.body.company}</li>
     <li>Email: ${req.body.email}</li>
     <li>Phone: ${req.body.phone}</li>
   </ul>
   <h3>Message</h3>
   <p>${req.body.message}</p>`;
- })
-
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: 'mail.google.com',
-    port: 465,
-    secure: true, // true for 465, false for other ports
-    auth: {
-        user: 'ferguson.tyra@gmail.com', // generated ethereal user
-        pass: 'Father@89'  // generated ethereal password
-    },
-    tls:{
-      rejectUnauthorized:false
-    }
-  });
 
 
-  // setup email data with unicode symbols
-  let mailOptions = {
-      from: 'ferguson.tyra@gmail.com', // sender address
-      to: 'monique.ferg86@gmail.com', // list of receivers
-      subject: 'Node Contact Request', // Subject line
-      text: 'Hello world?', // plain text body
-      html: 'hello'// html body
-  };
-
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          return console.log(error);
-      }
-      console.log('Message sent: %s', info.messageId);   
-      console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-
-      res.render('contact', {msg:'Email has been sent'});
-  });
-
+ let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ty.devspot@gmail.com',
+    pass: 'Change@89'
+  }
+});
+let mailOptions = {
+  from: 'ty.devspot@gmail.com',
+  to: 'monique.ferg86@gmail.com',
+  subject: 'Sending Email using Node.js',
+  text: output
+}
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+})
+});
 
 router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
