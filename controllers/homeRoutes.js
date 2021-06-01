@@ -94,6 +94,7 @@ transporter.sendMail(mailOptions, function(error, info){
     console.log(error);
   } else {
     console.log('Email sent: ' + info.response);
+    res.render('contact', {msg:'Email has been sent'});
   }
 })
 });
