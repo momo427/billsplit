@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { Events, User, Memberships } = require("../models");
 const withAuth = require("../utils/auth");
 const nodemailer = require('nodemailer');
+require("dotenv").config()
 
 
 router.get("/", withAuth, async (req, res) => {
@@ -79,13 +80,13 @@ router.post("/send",withAuth, (req, res) =>{
  let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ty.devspot@gmail.com',
-    pass: 'Change@89'
+    user: process.env.NODE_EMAIL,
+    pass: process.env.NODE_EMAIL_PASS
   }
 });
 let mailOptions = {
   from: 'ty.devspot@gmail.com',
-  to: 'monique.ferg86@gmail.com',
+  to: req.body.email,
   subject: 'Sending Email using Node.js',
   text: output
 }
